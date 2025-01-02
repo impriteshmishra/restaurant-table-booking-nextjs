@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import Confirmation from "../components/Confirmation";
 
-export default function Form() {
+export default function page() {
   const [formData, setFormData] = useState({
     date: "",
     time: "",
