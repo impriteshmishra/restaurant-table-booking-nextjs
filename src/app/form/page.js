@@ -25,7 +25,7 @@ export default function page() {
     // console.log(formData);
     setIsLoading(true);
     try {
-      const response = await axios.post(`${process.env.PUBLIC_URL}/api/checkAvailability`, formData, {
+      const response = await axios.post('http://localhost:3000/api/checkAvailability', formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -44,7 +44,7 @@ export default function page() {
   const submitBooking = async (e) => {
     // console.log(formData);
     e.preventDefault();
-   
+
 
     if (!formData.date || !formData.time || !formData.name || !formData.contact || formData.guests <= 0) {
       setMessage("All fields are required!.");
@@ -53,7 +53,7 @@ export default function page() {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(`${process.env.PUBLIC_URL}/api/bookTable`, formData, {
+      const response = await axios.post('http://localhost:3000/api/bookTable', formData, {
         headers: {
           "Content-Type": "application/json",
         },
