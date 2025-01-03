@@ -25,7 +25,7 @@ export default function page() {
     // console.log(formData);
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/checkAvailability', formData, {
+      const response = await axios.post('/api/checkAvailability', formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -53,7 +53,7 @@ export default function page() {
 
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/bookTable', formData, {
+      const response = await axios.post('/api/bookTable', formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -63,7 +63,7 @@ export default function page() {
       console.log("This is data", data);
       setBookingConfirm(true);
       setMessage(data.message);
-   
+
 
     } catch (error) {
       if (error.response?.status === 409) {
@@ -166,12 +166,12 @@ export default function page() {
               time={formData.time}
               guests={formData.guests}
               contact={formData.contact}
-              
+
             />
           )
         }
 
-       
+
         {message && <p className="flex flex-col items-center mx-24 text-lg text-green-500">{message}</p>}
 
 
