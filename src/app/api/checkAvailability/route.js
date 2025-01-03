@@ -19,10 +19,14 @@ export async function POST(req) {
 
         const existingBooking = await Booking.findOne({ date, time });
 
+        if(existingBooking){
+            return new Response(JSON.stringify({ available: false, message: "Slot not available." }), {
+                status: 200,
+            })
+        }
+        // const isAvailable = !existingBooking;
 
-        const isAvailable = !existingBooking;
-
-        return new Response(JSON.stringify({ available: isAvailable }), {
+        return new Response(JSON.stringify({ available: true, message: "Slot available." }), {
             status: 200,
         })
 

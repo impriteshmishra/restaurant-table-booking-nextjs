@@ -13,13 +13,12 @@ export async function POST(req) {
             });
         }
 
-
         await dbConnect();
 
 
         const existingBooking = await Booking.findOne({ date, time });
         if (existingBooking) {
-            return new Response(JSON.stringify({ message: 'Time slot is already booked' }), {
+            return new Response(JSON.stringify({ message: 'Time slot is already booked, check another slot' }), {
                 status: 409,
             });
 
@@ -28,7 +27,7 @@ export async function POST(req) {
             const newBooking = new Booking({ name, contact, date, time, guests });
             await newBooking.save();
 
-            return new Response(JSON.stringify({ message: 'Booking Successfull' }), {
+            return new Response(JSON.stringify({ message: 'Booking Successfull!' }), {
                 status: 201,
             })
         }
