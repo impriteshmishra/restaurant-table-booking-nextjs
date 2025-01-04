@@ -1,19 +1,28 @@
+import { NextResponse } from 'next/server.js';
 import dbConnect from '../../lib/connectDB.js';
 import Booking from '../../models/Booking.js';
 
-export default async function GET(req) {
+
+export async function GET(req) {
+
   try {
-
     await dbConnect();
-    const booking = await Booking.find();
-    return new Response(JSON.stringify({booking}), {
-      status: 200,
+    const items = await Booking.find().sort({ createdAt: -1 });
+    
+    return NextResponse.json({
+      success:true,
+      message:'items get successfully',
+      data:items,
     })
-
   } catch (error) {
-    return new Response(JSON.stringify({ message: 'Server error', error: error.message }), {
-      status: 500,
-    })
-
+    console.error("Database error:", error);
+    return NextResponse.json({
+      success:false,
+      message:'error while getting',
+    },
+  {
+    status:500
+  })
   }
 }
+
