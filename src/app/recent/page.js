@@ -44,9 +44,9 @@ export default function BookingsPage() {
             {bookings.map((booking) => (
               <li key={booking._id} className="p-4 border rounded shadow">
                 <div className="relative p-2">
-                  <button className="absolute top-2 right-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-white hover:text-black">
+                  {/* <button className="absolute top-2 right-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-white hover:text-black">
                     Delete
-                  </button>
+                  </button> */}
                   <h2 className="text-lg font-semibold">{booking.name}</h2>
                   <p>Time: {booking.time}</p>
                   <p>Date: {new Date(booking.date).toLocaleDateString()}</p>
