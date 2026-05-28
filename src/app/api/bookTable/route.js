@@ -1,6 +1,24 @@
 import dbConnect from '../../lib/connectDB.js';
 import Booking from '../../models/Booking';
 
+    function generateCustomerId() {
+
+    let upperChar = "ABCDEFGHIJKLMONOPQRSTUVWXYZ";
+    let allNumbers = "0123456789";
+    let Id = "";
+    let allChars = "";
+
+    allChars += upperChar;
+    allChars += allNumbers;
+
+    let i = 1;
+    while (i <= 5) {
+      Id += allChars.charAt(Math.floor(Math.random() * allChars.length));
+      i++;
+    }
+    return Id;
+  }
+
 export async function POST(req) {
     try {
         const body = await req.json();
@@ -15,6 +33,7 @@ export async function POST(req) {
 
         await dbConnect();
 
+        const uniqueCustomerId = generateCustomerId();
 
         const existingBooking = await Booking.findOne({ date, time });
         if (existingBooking) {
@@ -24,10 +43,10 @@ export async function POST(req) {
 
         }
         else {
-            const newBooking = new Booking({ name, contact, date, time, guests });
+            const newBooking = new Booking({ name, contact, date, time, guests,customerId: uniqueCustomerId });
             await newBooking.save();
 
-            return new Response(JSON.stringify({ message: 'Booking Successfull!' }), {
+            return new Response(JSON.stringify({ message: 'Booking Successfull!', customerId: uniqueCustomerId }), {
                 status: 201,
             })
         }

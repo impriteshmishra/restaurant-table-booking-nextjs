@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 
 
-function Confirmation({ name, date, time, guests, contact}) {
+function Confirmation({ name, date, time, guests, contact,customerId}) {
   return (
     <div>
       <Dialog>
@@ -31,7 +31,8 @@ function Confirmation({ name, date, time, guests, contact}) {
                 <li className='font-semibold text-black'>Name: {name}</li>
                 <li className='font-semibold text-black'>Guest: {guests}</li>
                 <li className='font-semibold text-black'>Contact: {contact}</li>
-                
+                <li className='font-semibold text-black'>Customer Id: {customerId}</li>
+                <Button/>
               </ul>
             </DialogDescription>
           </DialogHeader>

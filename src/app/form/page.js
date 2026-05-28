@@ -3,8 +3,13 @@
 import axios from "axios";
 import { useState } from "react";
 import Confirmation from "../components/Confirmation";
+import { useRouter } from "next/navigation"
+
+import { Button } from "@/components/ui/button";
+
 
 export default function page() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     date: "",
     time: "",
@@ -15,11 +20,14 @@ export default function page() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [bookingConfirm, setBookingConfirm] = useState(false);
+  const [customerId, setCustomerId] = useState("");
+
 
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
 
   const checkAvailability = async () => {
     // console.log(formData);
@@ -51,8 +59,12 @@ export default function page() {
       return;
     }
 
+
+
     setIsLoading(true);
     try {
+
+
       const response = await axios.post('/api/bookTable', formData, {
         headers: {
           "Content-Type": "application/json",
@@ -60,6 +72,11 @@ export default function page() {
       });
 
       const data = response.data;
+
+      setCustomerId(data.customerId);
+
+      console.log(data.customerId);
+
       console.log("This is data", data);
       setBookingConfirm(true);
       setMessage(data.message);
@@ -74,6 +91,14 @@ export default function page() {
     }
     setIsLoading(false);
   };
+
+  const handleConfirmationDownload = () => {
+    router.push({
+      pathname: '/downloadConfirmation',
+      query: formData,
+    }, '/downloadConfirmation'); 
+  };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center p-4 bg-gray-100">
@@ -140,6 +165,7 @@ export default function page() {
             className="w-full p-2 border rounded"
           />
         </div>
+
         <h2 className="flex flex-col items-center text-sm" >Check table availability by date and time. </h2>
         <button
           type="button"
@@ -166,7 +192,7 @@ export default function page() {
               time={formData.time}
               guests={formData.guests}
               contact={formData.contact}
-
+              customerId={customerId}
             />
           )
         }
@@ -176,6 +202,11 @@ export default function page() {
 
 
       </form>
+
+      <Button
+        onClick={handleConfirmationDownload}
+      >Download</Button>
+
 
 
 

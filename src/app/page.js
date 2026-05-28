@@ -14,8 +14,8 @@ function page() {
       {/* <Navbar /> */}
       <div className="flex flex-col md:flex-row gap-10 justify-evenly items-center mt-10">
         <div className=" bg-gray-100 w-56 gap-4 p-5 flex flex-col items-center  justify-between rounded-md">
-          <div class="text-center">
-            <p class=" font-semibold">Make your booking here</p>
+          <div className="text-center">
+            <p className=" font-semibold">Make your booking here</p>
           </div>
 
           <Button className="text-center text-white bg-blue-500 font-semibold hover:border-blue-200 hover:text-black" variant="outline"
@@ -25,8 +25,8 @@ function page() {
           >Click</Button>
         </div>
         <div className=" bg-gray-100 p-5 gap-4 w-52 flex flex-col items-center  justify-between rounded-md">
-          <div class="text-center">
-            <p class=" font-semibold">Recent Booking</p>
+          <div className="text-center">
+            <p className=" font-semibold">Recent Booking</p>
           </div>
 
           <Button 
